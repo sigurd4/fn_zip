@@ -9,7 +9,6 @@ repository = "https://github.com/sigurd4/serialize_rows"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-currying = "0.2.1"
 moddef = "0.2.2"
 tupleops = "0.1.1"
 
