@@ -1,6 +1,6 @@
 [package]
 name = "fn_zip"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 license = "MIT"
 description = "Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called."
