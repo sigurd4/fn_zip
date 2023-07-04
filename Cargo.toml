@@ -1,0 +1,18 @@
+[package]
+name = "fn_zip"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called."
+repository = "https://github.com/sigurd4/serialize_rows"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+currying = "0.2.1"
+moddef = "0.2.2"
+tupleops = "0.1.1"
+
+[features]
+default = []
+par =  []
