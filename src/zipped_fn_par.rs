@@ -1,4 +1,4 @@
-use core::{marker::{Tuple}, any::Any};
+use core::{marker::Tuple, any::Any};
 
 use tupleops::{TupleConcat, ConcatTuples};
 
@@ -53,7 +53,7 @@ where
     RF: FnOnce<RX, Output: Send> + Send,
     (LX, RX): TupleConcat<LX, RX, Type: Tuple>
 {
-    pub const fn from(zipped: ZippedFn<LX, RX, LF, RF>) -> Self
+    pub /*const*/ fn from(zipped: ZippedFn<LX, RX, LF, RF>) -> Self
     {
         Self
         {
@@ -63,7 +63,7 @@ where
         }
     }
 }
-impl<LX, RX, LF, RF> const From<ZippedFn<LX, RX, LF, RF>> for ZippedFnPar<LX, RX, LF, RF>
+impl<LX, RX, LF, RF> /*const*/ From<ZippedFn<LX, RX, LF, RF>> for ZippedFnPar<LX, RX, LF, RF>
 where
     LX: Tuple + Send,
     RX: Tuple + Send,
@@ -94,8 +94,9 @@ where
         let (args_left, args_right) = private::tuple_split_const(args);
 
         let mut builders = [Builder::new(), Builder::new()]
-        .zip(self.thread_names.each_mut()
-            .zip(self.thread_stack_sizes.each_mut())
+        .into_iter()
+        .zip(self.thread_names.each_mut().into_iter()
+            .zip(self.thread_stack_sizes.each_mut().into_iter())
         ).map(|(mut builder, (name, stack_size))| {
             if let Some(name) = name.take()
             {
@@ -106,7 +107,7 @@ where
                 builder = builder.stack_size(stack_size);
             }
             builder
-        }).into_iter();
+        });
 
         std::thread::scope(|scope| {
             let (handle_left, handle_right) = (
@@ -138,9 +139,9 @@ where
         
         let (args_left, args_right) = private::tuple_split_const(args);
 
-        let mut builders = [Builder::new(), Builder::new()]
-        .zip(self.thread_names.each_ref()
-            .zip(self.thread_stack_sizes.each_ref())
+        let mut builders = [Builder::new(), Builder::new()].into_iter()
+        .zip(self.thread_names.each_ref().into_iter()
+            .zip(self.thread_stack_sizes.each_ref().into_iter())
         ).map(|(mut builder, (name, stack_size))| {
             if let Some(name) = name
             {
@@ -151,7 +152,7 @@ where
                 builder = builder.stack_size(*stack_size);
             }
             builder
-        }).into_iter();
+        });
 
         std::thread::scope(|scope| {
             let (handle_left, handle_right) = (
@@ -183,9 +184,9 @@ where
         
         let (args_left, args_right) = private::tuple_split_const(args);
 
-        let mut builders = [Builder::new(), Builder::new()]
-        .zip(self.thread_names.each_ref()
-            .zip(self.thread_stack_sizes.each_ref())
+        let mut builders = [Builder::new(), Builder::new()].into_iter()
+        .zip(self.thread_names.each_ref().into_iter()
+            .zip(self.thread_stack_sizes.each_ref().into_iter())
         ).map(|(mut builder, (name, stack_size))| {
             if let Some(name) = name
             {
@@ -196,7 +197,7 @@ where
                 builder = builder.stack_size(*stack_size);
             }
             builder
-        }).into_iter();
+        });
 
         std::thread::scope(|scope| {
             let (handle_left, handle_right) = (

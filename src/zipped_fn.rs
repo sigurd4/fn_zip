@@ -43,12 +43,12 @@ where
     pub(crate) phantom: PhantomData<(LX, RX)>
 }
 
-impl<LX, RX, LF, RF> const FnOnce<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
+impl<LX, RX, LF, RF> /*const*/ FnOnce<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
 where
     LX: Tuple,
     RX: Tuple,
-    LF: ~const FnOnce<LX> + ~const Destruct,
-    RF: ~const FnOnce<RX> + ~const Destruct,
+    LF: /*~const*/ FnOnce<LX> + /*~const*/ Destruct,
+    RF: /*~const*/ FnOnce<RX> + /*~const*/ Destruct,
     (LX, RX): TupleConcat<LX, RX, Type: Tuple>
 {
     type Output = (LF::Output, RF::Output);
@@ -60,12 +60,12 @@ where
     }
 }
 
-impl<LX, RX, LF, RF> const FnMut<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
+impl<LX, RX, LF, RF> /*const*/ FnMut<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
 where
     LX: Tuple,
     RX: Tuple,
-    LF: ~const FnMut<LX> + ~const Destruct,
-    RF: ~const FnMut<RX> + ~const Destruct,
+    LF: /*~const*/ FnMut<LX> + /*~const*/ Destruct,
+    RF: /*~const*/ FnMut<RX> + /*~const*/ Destruct,
     (LX, RX): TupleConcat<LX, RX, Type: Tuple>
 {
     extern "rust-call" fn call_mut(&mut self, args: ConcatTuples<LX, RX>) -> Self::Output
@@ -75,12 +75,12 @@ where
     }
 }
 
-impl<LX, RX, LF, RF> const Fn<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
+impl<LX, RX, LF, RF> /*const*/ Fn<ConcatTuples<LX, RX>> for ZippedFn<LX, RX, LF, RF>
 where
     LX: Tuple,
     RX: Tuple,
-    LF: ~const Fn<LX> + ~const Destruct,
-    RF: ~const Fn<RX> + ~const Destruct,
+    LF: /*~const*/ Fn<LX> + /*~const*/ Destruct,
+    RF: /*~const*/ Fn<RX> + /*~const*/ Destruct,
     (LX, RX): TupleConcat<LX, RX, Type: Tuple>
 {
     extern "rust-call" fn call(&self, args: ConcatTuples<LX, RX>) -> Self::Output

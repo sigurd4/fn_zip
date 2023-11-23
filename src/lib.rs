@@ -36,8 +36,6 @@
 #![feature(trait_alias)]
 #![feature(cfg_accessible)]
 #![feature(array_methods)]
-#![feature(array_zip)]
-#![feature(const_default_impls)]
 
 moddef::moddef!(
     flat(pub) mod {
