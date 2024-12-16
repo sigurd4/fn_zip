@@ -33,7 +33,6 @@
 #![feature(fn_traits)]
 #![feature(const_destruct)]
 #![feature(async_fn_traits)]
-#![feature(array_methods)]
 
 moddef::moddef!(
     flat(pub) mod {
