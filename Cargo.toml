@@ -3,20 +3,40 @@ name = "fn_zip"
 version = "0.1.2"
 edition = "2021"
 license = "MIT"
+keywords = ["function", "fp", "curry", "currying", "haskell"]
+categories = ["rust-patterns", "algorithms", "mathematics", "no-std::no-alloc"]
 description = "Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called."
 repository = "https://github.com/sigurd4/fn_zip"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "fn_zip"
+
+[features]
+default = ["default-len"]
+default-len = ["16"]
+max-len = ["256"]
+
+8 = ["tupleops/8", "tuple_split/8"]
+16 = ["8", "tupleops/16", "tuple_split/16"]
+32 = ["16", "tupleops/32", "tuple_split/32"]
+64 = ["32", "tupleops/64", "tuple_split/64"]
+96 = ["64", "tupleops/96", "tuple_split/96"]
+128 = ["96", "tupleops/128", "tuple_split/128"]
+160 = ["128", "tupleops/160", "tuple_split/160"]
+192 = ["160", "tupleops/192", "tuple_split/192"]
+224 = ["192", "tupleops/224", "tuple_split/224"]
+256 = ["224", "tupleops/256", "tuple_split/256"]
+dont_hurt_yourself_by_using_all_features = ["tupleops/dont_hurt_yourself_by_using_all_features", "tuple_split/dont_hurt_yourself_by_using_all_features"]
+
+experimental = ["async"]
+async =  []
+
 [dependencies]
 moddef = "0.2.6"
 tupleops = {version = "0.1.1", default-features = false, features = ["concat"]}
 tuple_split = {version = "0.2.4", default-features = false}
-
-[features]
-default = ["async"]
-experimental = ["async"]
-async =  []
 
 [dev-dependencies]
 tokio = {version = "*", features = ["rt", "macros"]}

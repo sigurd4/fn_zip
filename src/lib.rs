@@ -1,4 +1,7 @@
-//! Combines two functions into one where the arguments are conjoined and the return-values are given in a tuple pair.
+//! Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called.
+//! This is equivalent to `core::future::join!()`, but lazy, and works for non-async functions.
+//! 
+//! The resulting function takes the arguments of both functions and return a tuple.
 //!
 //! # Example
 //!
@@ -102,7 +105,6 @@ mod tests
         let (x_a, x_b) = (4.0, 23);
 
         // I don't know of any prettier way to call an async function...
-        // This is a new thing.
 
         let (y_a, y_b) = ab.async_call((x_a, x_b)).await;
 
