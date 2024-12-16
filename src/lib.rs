@@ -117,4 +117,30 @@ mod tests
         assert_eq!(y_a, a(x_a).await);
         assert_eq!(y_b, b(x_b).await);
     }
+
+    #[test]
+    fn test_const()
+    {
+        fn a(x: f32) -> f64
+        {
+            (x as f64).sqrt()
+        }
+        fn b(x: u8) -> u8
+        {
+            x + 1
+        }
+
+        // Corce functions into function pointers
+        const A: fn(f32) -> f64 = a;
+        const B: fn(u8) -> u8 = b;
+
+        // Zip during compile time
+        const AB: ZippedFn<(f32,), (u8,), fn(f32) -> f64, fn(u8) -> u8> = A.fn_zip_once(B);
+        let (x_a, x_b) = (4.0, 23);
+
+        let (y_a, y_b) = AB(x_a, x_b);
+
+        assert_eq!(y_a, a(x_a));
+        assert_eq!(y_b, b(x_b));
+    }
 }
