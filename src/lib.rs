@@ -1,3 +1,10 @@
+#![no_std]
+#![feature(unboxed_closures)]
+#![feature(tuple_trait)]
+#![feature(const_trait_impl)]
+#![feature(fn_traits)]
+#![cfg_attr(feature = "async", feature(async_fn_traits))]
+
 //! Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called.
 //! This is equivalent to `core::future::join!()`, but lazy, and works for non-async functions.
 //!
@@ -25,14 +32,6 @@
 //! assert_eq!(y_a, a(x_a));
 //! assert_eq!(y_b, b(x_b));
 //! ```
-
-#![no_std]
-#![feature(unboxed_closures)]
-#![feature(tuple_trait)]
-#![feature(const_trait_impl)]
-#![feature(fn_traits)]
-#![feature(const_destruct)]
-#![feature(async_fn_traits)]
 
 moddef::moddef!(
     flat(pub) mod {
