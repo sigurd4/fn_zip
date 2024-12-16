@@ -1,6 +1,6 @@
 //! Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called.
 //! This is equivalent to `core::future::join!()`, but lazy, and works for non-async functions.
-//! 
+//!
 //! The resulting function takes the arguments of both functions and return a tuple.
 //!
 //! # Example
@@ -33,7 +33,6 @@
 #![feature(fn_traits)]
 #![feature(const_destruct)]
 #![feature(async_fn_traits)]
-
 #![feature(array_methods)]
 #![feature(associated_type_bounds)]
 #![feature(const_mut_refs)]
@@ -62,7 +61,7 @@ mod tests
         {
             x + 1
         }
-        
+
         let mut ab = a.fn_zip(b);
         let (x_a, x_b) = (4.0, 23);
 
