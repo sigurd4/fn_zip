@@ -40,3 +40,7 @@ tuple_split = {version = "0.2.4", default-features = false}
 
 [dev-dependencies]
 tokio = {version = "1.42.0", features = ["rt", "macros"]}
+
+[package.metadata.docs.rs]
+
+all-features = true
