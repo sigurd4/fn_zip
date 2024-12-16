@@ -34,8 +34,6 @@
 #![feature(const_destruct)]
 #![feature(async_fn_traits)]
 #![feature(array_methods)]
-#![feature(associated_type_bounds)]
-#![feature(const_mut_refs)]
 
 moddef::moddef!(
     flat(pub) mod {
