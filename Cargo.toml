@@ -9,9 +9,13 @@ repository = "https://github.com/sigurd4/fn_zip"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-moddef = "0.2.2"
-tupleops = "0.1.1"
+moddef = "0.2.6"
+tupleops = {version = "0.1.1", default-features = false, features = ["concat"]}
+tuple_split = {version = "0.2.4", default-features = false}
 
 [features]
 default = []
-par =  []
+async =  []
+
+[dev-dependencies]
+tokio = {version = "*", features = ["rt", "macros"]}

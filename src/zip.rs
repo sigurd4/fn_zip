@@ -1,4 +1,4 @@
-use core::marker::{Tuple, PhantomData};
+use core::{iter::Zip, marker::{PhantomData, Tuple}};
 
 use tupleops::TupleConcat;
 
@@ -33,7 +33,19 @@ pub trait FnZip<RX, LX, Rhs>
 {
     type Output;
 
-    fn fn_zip(self, rhs: Rhs) -> <Self as FnZip<RX, LX, Rhs>>::Output;
+    fn fn_zip_once(self, rhs: Rhs) -> Self::Output;
+    fn fn_zip_mut<'a>(&'a mut self, rhs: Rhs) -> <&'a mut Self as FnZip<RX, LX, Rhs>>::Output
+    where
+        &'a mut Self: ~const FnZip<RX, LX, Rhs>
+    {
+        self.fn_zip_once(rhs)
+    }
+    fn fn_zip<'a>(&'a self, rhs: Rhs) -> <&'a Self as FnZip<RX, LX, Rhs>>::Output
+    where
+        &'a Self: ~const FnZip<RX, LX, Rhs>
+    {
+        self.fn_zip_once(rhs)
+    }
 }
 
 impl<RX, LX, LF, RF> const FnZip<RX, LX, RF> for LF
@@ -46,12 +58,8 @@ where
 {
     type Output = ZippedFn<LX, RX, LF, RF>;
 
-    fn fn_zip(self, rhs: RF) -> <Self as FnZip<RX, LX, RF>>::Output
+    fn fn_zip_once(self, rhs: RF) -> Self::Output
     {
-        ZippedFn {
-            left: self,
-            right: rhs,
-            phantom: PhantomData
-        }
+        ZippedFn::new(self, rhs)
     }
 }
