@@ -1,11 +1,11 @@
 [package]
 name = "fn_zip"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license = "MIT"
 keywords = ["function", "fp", "zip", "join", "async"]
 categories = ["rust-patterns", "algorithms", "no-std::no-alloc"]
-description = "Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called."
+description = "Provides a zip trait for functions, allowing two functions to be combined before being called."
 repository = "https://github.com/sigurd4/fn_zip"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
