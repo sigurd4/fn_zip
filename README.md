@@ -75,6 +75,8 @@ assert_eq!(y_a, a(x_a).await);
 assert_eq!(y_b, b(x_b).await);
 ```
 
+Independent of this feature, it's still possible to zip two asyncronous functions normally, but their futures will not be joined.
+
 ## Tuple sizes
 
 By default, this crate operates with function pairs of up to 16 arguments combined, and splits them up in the form of tuples. If you want to use differently sized tuples, use the features `8`, `16`, `32`, `64`, `96`, `128`, `160`, `192`, `224` or `256` to set the maximum supported tuple size.
