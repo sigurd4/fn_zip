@@ -50,7 +50,9 @@ where
 impl<LX, RX, LF, RF> ZippedFn<LX, RX, LF, RF>
 where
     LX: Tuple,
-    RX: Tuple
+    RX: Tuple,
+    LF: FnOnce<LX>,
+    RF: FnOnce<RX>
 {
     pub const fn new(left: LF, right: RF) -> Self
     {
