@@ -14,7 +14,7 @@ repository = "https://github.com/sigurd4/fn_zip"
 name = "fn_zip"
 
 [features]
-default = ["default-len"]
+default = ["default-len", "async"]
 default-len = ["16"]
 max-len = ["256"]
 
@@ -39,7 +39,7 @@ tupleops = {version = "0.1.1", default-features = false, features = ["concat"]}
 tuple_split = {version = "0.2.4", default-features = false}
 
 [dev-dependencies]
-tokio = {version = "1.42.0", features = ["rt", "macros"]}
+tokio-test = "0.4.4"
 
 [package.metadata.docs.rs]
 

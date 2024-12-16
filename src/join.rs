@@ -4,6 +4,37 @@ use core::{future::Future, pin::Pin, task::{Context, Poll}};
 /// 
 /// This is really only for use with the `ZippedFn` struct.
 /// If you need to join threads normally, use the `core::future::join!` macro.
+/// 
+/// # Example
+/// 
+/// ```rust
+/// #![feature(fn_traits)]
+/// #![feature(async_fn_traits)]
+/// 
+/// use fn_zip::*;
+/// use core::ops::AsyncFn;
+/// 
+/// async fn a(x: f32) -> f64
+/// {
+///     (x as f64).sqrt()
+/// }
+/// async fn b(x: u8) -> u8
+/// {
+///     x + 1
+/// }
+/// 
+/// let ab = a.fn_zip(b);
+/// let (x_a, x_b) = (4.0, 23);
+/// 
+/// # tokio_test::block_on(async {
+/// // I don't know of any prettier way to call an async function...
+/// 
+/// let (y_a, y_b) = ab.async_call((x_a, x_b)).await;
+/// 
+/// assert_eq!(y_a, a(x_a).await);
+/// assert_eq!(y_b, b(x_b).await);
+/// # })
+/// ```
 pub struct JoinedPair<L, R>
 where
     L: Future,

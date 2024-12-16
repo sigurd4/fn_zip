@@ -51,8 +51,7 @@ This is an experimental feature, since it just recently (as of writing) got adde
 #![feature(async_fn_traits)]
 
 use fn_zip::*;
-
-use core::ops::{AsyncFn, AsyncFnMut, AsyncFnOnce};
+use core::ops::AsyncFn;
 
 async fn a(x: f32) -> f64
 {
@@ -63,7 +62,7 @@ async fn b(x: u8) -> u8
     x + 1
 }
 
-let mut ab = a.fn_zip(b);
+let ab = a.fn_zip(b);
 let (x_a, x_b) = (4.0, 23);
 
 // I don't know of any prettier way to call an async function...
@@ -81,6 +80,10 @@ Independent of this feature, it's still possible to zip two asyncronous function
 Functions can also be zipped during compile-time.
 
 ```rust
+#![feature(const_trait_impl)]
+
+use fn_zip::*;
+
 fn a(x: f32) -> f64
 {
     (x as f64).sqrt()
