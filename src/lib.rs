@@ -35,38 +35,39 @@
 //! 
 //! # Async
 //! 
-//! The zipped functions can also implement `AsyncFnOnce`, `AsyncFnMut` and `AsyncFn` if both functions qualify.
+//! The zipped functions can also implement [AsyncFnOnce](core::ops::AsyncFnOnce), [AsyncFnMut](core::ops::AsyncFnMut) and [AsyncFn](core::ops::AsyncFn) if both functions qualify.
 //! 
 //! This is an experimental feature, since it just recently (as of writing) got added to the rust core library on rust-nightly, and may be subject to change at any point. Enable it with feature `async` or `experimental`.
 //! 
-//! ```rust
-//! #![feature(fn_traits)]
-//! #![feature(async_fn_traits)]
-//! 
-//! use fn_zip::*;
-//! use core::ops::AsyncFn;
-//! 
-//! async fn a(x: f32) -> f64
-//! {
-//!     (x as f64).sqrt()
-//! }
-//! async fn b(x: u8) -> u8
-//! {
-//!     x + 1
-//! }
-//! 
-//! let ab = a.fn_zip(b);
-//! let (x_a, x_b) = (4.0, 23);
-//! 
-//! # tokio_test::block_on(async {
-//! // I don't know of any prettier way to call an async function...
-//! 
-//! let (y_a, y_b) = ab.async_call((x_a, x_b)).await;
-//! 
-//! assert_eq!(y_a, a(x_a).await);
-//! assert_eq!(y_b, b(x_b).await);
-//! # })
-//! ```
+#![cfg_attr(feature = "async", doc = r##"
+```rust
+#![feature(fn_traits)]
+#![feature(async_fn_traits)]
+
+use fn_zip::*;
+use core::ops::AsyncFn;
+ 
+async fn a(x: f32) -> f64
+{
+    (x as f64).sqrt()
+}
+async fn b(x: u8) -> u8
+{
+    x + 1
+}
+
+let ab = a.fn_zip(b);
+let (x_a, x_b) = (4.0, 23);
+
+# tokio_test::block_on(async {
+// I don't know of any prettier way to call an async function...
+
+let (y_a, y_b) = ab.async_call((x_a, x_b)).await;
+
+assert_eq!(y_a, a(x_a).await);
+assert_eq!(y_b, b(x_b).await);
+# })
+```"##)]
 //! 
 //! Independent of this feature, it's still possible to zip two asyncronous functions normally, but their futures will not be joined.
 //! 

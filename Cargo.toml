@@ -14,7 +14,7 @@ repository = "https://github.com/sigurd4/fn_zip"
 name = "fn_zip"
 
 [features]
-default = ["default-len", "async"]
+default = ["default-len"]
 default-len = ["16"]
 max-len = ["256"]
 
