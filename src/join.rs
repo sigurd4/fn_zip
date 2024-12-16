@@ -63,7 +63,7 @@ where
     }
 }
     
-pub enum MaybeDone<F: Future>
+enum MaybeDone<F: Future>
 {
     Future(F),
     Done(F::Output),
