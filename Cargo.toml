@@ -3,8 +3,8 @@ name = "fn_zip"
 version = "0.1.2"
 edition = "2021"
 license = "MIT"
-keywords = ["function", "fp", "curry", "currying", "haskell"]
-categories = ["rust-patterns", "algorithms", "mathematics", "no-std::no-alloc"]
+keywords = ["function", "fp", "zip", "join", "async"]
+categories = ["rust-patterns", "algorithms", "no-std::no-alloc"]
 description = "Provides a zip trait for functions, allowing two functions to be combined at compile-time before being called."
 repository = "https://github.com/sigurd4/fn_zip"
 
