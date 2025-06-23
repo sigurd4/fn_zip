@@ -34,7 +34,7 @@ experimental = ["async"]
 async =  []
 
 [dependencies]
-moddef = "0.2.6"
+moddef = "0.3.0"
 tupleops = {version = "0.1.1", default-features = false, features = ["concat"]}
 tuple_split = {version = "0.2.4", default-features = false}
 
